@@ -101,6 +101,17 @@ app.get('/events', (req,res)=>{
     res.send(events);
 })
 
+// part-5
+app.get('/events/:id', (req,res)=>{
+    const id = req.params.id;
+    const event = events.find(event => event.id === parseInt(id));
+    if (!event) {
+        res.status(404).send('The event witj the given ID was not found');
+    } else {
+        res.send(event)
+    }
+})
+
 app.listen(3000,()=>{
     console.log('Server is listeming posrt 3000!');
 })
