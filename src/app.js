@@ -97,11 +97,16 @@ const events = [
         "organizer": "Brody Kill"
     }
 ]
+
+function getEevntsByPatialName(name) {
+    return events.find(event => event.title.includes(name)); 
+}
+
 app.get('/events', (req,res)=>{
     const name = req.query.name;
     console.log(name);
     if (name) {
-        const event = events.find(event => event.title === name);
+        const event = getEevntsByPatialName(name);
         if (!event) {
             res.status(404).send('The event with the given name was not found');
         } else {
