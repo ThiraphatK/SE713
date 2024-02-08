@@ -8,6 +8,12 @@ app.get('/test', (req,res)=>{
     res.send(output)
 });
 
+app.get('/test/:id/name/:name', (req,res)=>{
+    const id = req.params.id;
+    const name = req.params.name;
+    res.send(`id: ${id} and name: ${name}`)
+})
+
 app.listen(3000,()=>{
     console.log('Server is listeming posrt 3000!');
 })
