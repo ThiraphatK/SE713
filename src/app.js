@@ -1,17 +1,11 @@
 const express = require('express');
 const app = express();
 
-app.get('/', (req,res)=>{
-    res.send('hello world!');
-});
-
-app.get('/hello', (req,res)=>{
-    const returnObj = {
-        name:"test",
-        age: "20",
-        address: "thai"
-    };
-    res.send(returnObj);
+app.get('/test', (req,res)=>{
+    const id = req.query.id;
+    const name = req.query.name || 'No name';
+    const output = `id: ${id} and name: ${name}`;
+    res.send(output)
 });
 
 app.listen(3000,()=>{
