@@ -1,5 +1,8 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
+
+app.use(bodyParser.json());
 
 app.get('/test', (req,res)=>{
     const id = req.query.id;
@@ -11,6 +14,13 @@ app.get('/test', (req,res)=>{
 app.get('/test/:id/name/:name', (req,res)=>{
     const id = req.params.id;
     const name = req.params.name;
+    res.send(`id: ${id} and name: ${name}`)
+})
+
+app.post('/test', (req,res)=>{
+    const obj = req.body;
+    const id = obj.id;
+    const name = obj.name;
     res.send(`id: ${id} and name: ${name}`)
 })
 
