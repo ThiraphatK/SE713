@@ -12,8 +12,13 @@ function getAllEvents() {
     return events;
 }
 
+function addEvents(event) {
+    events.push(event)
+}
+
 module.exports = {
     getEventByName,
     getEevntsByPatialName,
-    getAllEvents
+    getAllEvents,
+    addEvents
 };

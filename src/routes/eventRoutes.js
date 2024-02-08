@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getEventByName, getEevntsByPatialName, getAllEvents } = require('../models/eventMockModel');
+const { getEventByName, getEevntsByPatialName, getAllEvents, addEvents } = require('../models/eventMockModel');
 
 router.get('/', (req,res)=>{
     const name = req.query.name;
@@ -24,6 +24,12 @@ router.get('/:id', (req,res)=>{
     } else {
         res.send(event)
     }
+});
+
+router.post('/', (req,res)=>{
+    const event = req.body;
+    addEvents(event);
+    res.send(event);
 });
 
 module.exports = router;
