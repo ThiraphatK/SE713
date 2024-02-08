@@ -28,7 +28,7 @@ app.post('/test', (req,res)=>{
     res.send(`id: ${id} and name: ${name}`)
 })
 
-// part-4
+// part-4 >>> part-6
 const events = [
     {
         "id": 123,
@@ -98,8 +98,19 @@ const events = [
     }
 ]
 app.get('/events', (req,res)=>{
-    res.send(events);
-})
+    const name = req.query.name;
+    console.log(name);
+    if (name) {
+        const event = events.find(event => event.title === name);
+        if (!event) {
+            res.status(404).send('The event with the given name was not found');
+        } else {
+            res.send(event);
+        }
+    } else {
+        res.send(events);
+    }
+});
 
 // part-5
 app.get('/events/:id', (req,res)=>{
