@@ -41,9 +41,21 @@ function getEventsByPatialName(name) {
         });
 };
 
+function addEvent(event) {
+    const { title, date, location, description, category, time, pet_allowed, organizer } = event;
+    return pool.query('INSERT INTO events (title, date, location, description, category, time, pet_allowed, organizer) VALUES (?,?,?,?,?,?,?,?)', [event.title, event.date, event.location, event.description, event.category, event.time, event.petAllowed, event.organizer])
+        .then(([result]) => {
+            return result.insertId;
+        }).catch((err) => {
+            console.error('Error adding event:', err);
+            throw err;
+        });
+}
+
 module.exports = {
     getAllEvents,
     getEventsById,
     getEventsByName,
-    getEventsByPatialName
+    getEventsByPatialName,
+    addEvent
 }

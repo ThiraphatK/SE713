@@ -25,4 +25,29 @@ router.get('/', (req,res) => {
     }
 });
 
+router.get('/:id', (req,res) => {
+    const id = req.params.id;
+    eventModels.getEventsById(id)
+        .then((event) => {
+            if (!event) {
+                res.status(400).send('The event with the given ID was not found');
+            } else {
+                res.send(event);
+            }
+        }).catch((err) => {
+            res.status(500).send('Error getting event');
+        });
+})
+
+router.post('/', (req,res) => {
+    const event = req.body;
+    eventModels.addEvent(event)
+        .then((eventId) => {
+            event.id = eventId;
+            res.send(event);
+        }).catch((err) => {
+            res.status(500).send('Error adding event');
+        });
+});
+
 module.exports = router;
