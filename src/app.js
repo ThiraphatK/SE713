@@ -1,6 +1,6 @@
 const express = require('express');
 const testRoutes = require('./routes/testRoutes');
-const eventRoutes = require('./routes/eventRoutes');
+const eventRoutes = require('./routes/eventDbRoutes');
 const app = express();
 
 app.use(express.json());
