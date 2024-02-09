@@ -9,7 +9,7 @@ function getAllEvents(callback) {
     })
 }
 
-function getEventByName(name) {
+function getEventByName(name,callback) {
     const sql = 'SELECT * FROM events WHERE title = ?';
     conn.query(sql, [name],(err, results) => {
         if (err) {
@@ -42,8 +42,15 @@ function getEventById(id, callback) {
     })
 }
 
-function addEvents(event) {
-    
+function addEvents(event,callback) {
+    const sql = 'INSERT INTO events (title, date, location, description, category, time, pet_allowed, organizer) VALUES (?,?,?,?,?,?,?,?)';
+    conn.query(sql, [event.title, event.date, event.location, event.description, event.category, event.time, event.petAllowed, event.organizer], (err, results) => {
+        if (err) {
+            console.error('Error adding event:', err);
+            return callback(err, null);
+        }
+        return callback(null, results);
+    })
 }
 
 module.exports = {

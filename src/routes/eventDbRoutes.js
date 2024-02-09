@@ -37,4 +37,18 @@ router.get('/:id', (req,res) => {
     })
 })
 
+
+router.post('/', (req, res) =>{
+    const event = req.body;
+    eventModels.addEvents(event, (err, results) => {
+        if (err) {
+            res.status(500).send('Error adding event');
+            return;
+        } else {
+            event.id = results.insertId;
+            res.send(event);
+        }
+    })
+})
+
 module.exports = router;
