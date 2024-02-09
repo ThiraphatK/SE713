@@ -15,3 +15,5 @@ connection.connect((err)=>{
         console.log('Connected to the datbase');
     }
 })
+
+module.exports = connection;
