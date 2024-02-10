@@ -65,21 +65,29 @@ app.get('/movies/all', (req,res)=>{
 
 app.get('/movies/:title', (req,res)=>{
     const title = req.params.title;
-    const movie = getMovieByTitle(title);
-    if (!movie) {
-        res.status(404).send('The movie with the given ID was not found');
+    if (title) {
+        const movie = getMovieByTitle(title);
+        if (!movie) {
+            res.status(404).send('The movie with the given ID was not found');
+        } else {
+            res.send(movie);
+        }
     } else {
-        res.send(movie);
+        res.send(movies);
     }
 });
 
 app.get('/movies', (req,res)=>{
     const rating = req.query.rating;
-    const movie = getMovieByRating(rating);
-    if (!movie) {
-        res.status(404).send('The movie with the given ID was not found');
+    if (rating) {
+        const movie = getMovieByRating(rating);
+        if (!movie) {
+            res.status(404).send('The movie with the given ID was not found');
+        } else {
+            res.send(movie);
+        }
     } else {
-        res.send(movie);
+        res.send(movies);
     }
 });
 
