@@ -2,11 +2,6 @@ const express = require('express');
 const router = express.Router();
 const testModels = require('../model/testModel');
 
-router.get('/all', (req,res)=>{
-    const allMovies = testModels.getAllMovies();
-    res.send(allMovies);
-});
-
 router.get('/:title', (req,res)=>{
     const title = req.params.title;
     if (title) {
