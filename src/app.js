@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+app.use(express.json());
+
 app.get('/', (req,res)=>{
     res.send('hello world!');
 });
@@ -14,9 +16,20 @@ app.get('/hello', (req,res)=>{
     res.send(returnObj);
 });
 
+app.get('/addMany', (req,res) => {
+    let firstNumer = req.query.firstNumber;
+    let secondNumber = req.query.secondNumber;
+    firstNumer = isNaN(firstNumer) ? 0 : firstNumer;
+    secondNumber = isNaN(secondNumber) ? 0 : secondNumber;
+    const result = parseInt(firstNumer) + parseInt(secondNumber);
+    res.send(`The result is: ${result}`);
+});
+
 app.post('/addMany', (req,res) => {
-    const firstNumer = req.query.firstNumber;
-    const secondNumber = req.query.secondNumber;
+    let firstNumer = req.body.firstNumber;
+    let secondNumber = req.body.secondNumber;
+    firstNumer = isNaN(firstNumer) ? 0 : firstNumer;
+    secondNumber = isNaN(secondNumber) ? 0 : secondNumber;
     const result = parseInt(firstNumer) + parseInt(secondNumber);
     res.send(`The result is: ${result}`);
 });
