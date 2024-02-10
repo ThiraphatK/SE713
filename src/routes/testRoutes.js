@@ -11,8 +11,6 @@ router.get('/:title', (req,res)=>{
         } else {
             res.send(movie);
         }
-    } else {
-        res.send(movies);
     }
 });
 
