@@ -35,4 +35,10 @@ router.get('/', (req,res)=>{
     }
 });
 
+router.post('/', (req,res)=>{
+    const movie = req.body;
+    const newMovie = testModels.addMovie(movie);
+    res.send(newMovie);
+});
+
 module.exports = router;

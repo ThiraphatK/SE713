@@ -12,8 +12,14 @@ function getMovieByRating(rating) {
     return movies.find(movie => movie.rating === rating);
 }
 
+function addMovie(movie) {
+    movies.push(movie);
+    return movie;
+}
+
 module.exports = {
     getAllMovies,
     getMovieByTitle,
     getMovieByRating,
+    addMovie
 };
