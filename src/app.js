@@ -26,12 +26,15 @@ app.get('/ex1', (req,res) => {
 });
 
 app.post('/ex2', (req,res) => {
-    let firstNumer = req.body.firstNumber;
+    let firstNumber = req.body.firstNumber;
     let secondNumber = req.body.secondNumber;
-    firstNumer = isNaN(firstNumer) ? 0 : firstNumer;
-    secondNumber = isNaN(secondNumber) ? 0 : secondNumber;
-    const result = parseInt(firstNumer) + parseInt(secondNumber);
-    res.send(`The result is: ${result}`);
+    firstNumber = firstNumber.toString();
+    secondNumber = secondNumber.toString();
+    const result = firstNumber + secondNumber;
+    const obj = {
+        result: result
+    };
+    res.send(obj);
 });
 
 app.listen(3000,()=>{
