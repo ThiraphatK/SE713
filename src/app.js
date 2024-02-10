@@ -16,7 +16,7 @@ app.get('/hello', (req,res)=>{
     res.send(returnObj);
 });
 
-app.get('/addMany', (req,res) => {
+app.get('/ex1', (req,res) => {
     let firstNumer = req.query.firstNumber;
     let secondNumber = req.query.secondNumber;
     firstNumer = isNaN(firstNumer) ? 0 : firstNumer;
@@ -25,7 +25,7 @@ app.get('/addMany', (req,res) => {
     res.send(`The result is: ${result}`);
 });
 
-app.post('/addMany', (req,res) => {
+app.post('/ex2', (req,res) => {
     let firstNumer = req.body.firstNumber;
     let secondNumber = req.body.secondNumber;
     firstNumer = isNaN(firstNumer) ? 0 : firstNumer;
