@@ -42,4 +42,27 @@ router.post('/', (req, res) => {
         });
 });
 
+router.delete('/', (req, res) => {
+    id = parseInt(req.query.id);
+    if (id) {
+        organizerModels.deleteOrganizerById(id)
+            .then((results) => {
+                res.status(200).send('delete organizer successfully!');
+            })
+            .catch((error) => {
+                console.error('Error deleting organizer:', error);
+                res.status(500).send('Error deleting organizer');
+            });
+    } else {
+        organizerModels.deleteAllOrganizers()
+            .then((results) => {
+                res.status(200).send('delete all organizers successfully!');
+            })
+            .catch((error) => {
+                console.error('Error deleting organizer:', error);
+                res.status(500).send('Error deleting organizer');
+            });
+    }
+});
+
 module.exports = router;
