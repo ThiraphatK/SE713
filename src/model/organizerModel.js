@@ -13,7 +13,7 @@ function getAllOrganizers() {
 
 // get a organizer by id
 function getOrganizerById(id) {
-    return pool.query('SELECT * FROM 713.organizer WHERE id = ?', [id])
+    return pool.query('SELECT * FROM organizer WHERE id = ?', [id])
         .then((rows) => {
             return rows[0];
         })
