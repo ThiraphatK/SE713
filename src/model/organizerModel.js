@@ -11,7 +11,6 @@ function getAllOrganizers() {
         });
 }
 
-// get a organizer by id
 function getOrganizerById(id) {
     return pool.query('SELECT * FROM organizer WHERE id = ?', [id])
         .then((rows) => {
@@ -22,21 +21,19 @@ function getOrganizerById(id) {
         });
 }
 
-// create a new organizer
 function createOrganizer(organizer) {
-    return pool.query('INSET INTO organizer VALUSE ?', [organizer])
-        .then((results) => {
-            return results;
+    const { id, name } = organizer;
+    return pool.query('INSERT INTO organizer (id, name) VALUES (?,?)', [id, name])
+        .then((result) => {
+            return result.insertId;
         })
         .catch((error) => {
             console.error('Error creating organizer:', error);
         });
 }
 
-
-// delete a organizer by id
 function deleteOrganizerById(id){
-    return pool.query('DELETE FROM 713.organizer WHERE id = ?', [id])
+    return pool.query('DELETE FROM organizer WHERE id = ?', [id])
         .then((results) => {
             return results;
         })
@@ -45,9 +42,8 @@ function deleteOrganizerById(id){
         });
 }
 
-// delete all organizer
 function deleteAllOrganizers(){
-    return pool.query('DELETE FROM 713.organizer')
+    return pool.query('DELETE FROM organizer')
         .then((results) => {
             return results;
         })

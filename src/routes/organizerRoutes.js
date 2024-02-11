@@ -29,4 +29,17 @@ router.get('/', (req, res) => {
     }
 });
 
+router.post('/', (req, res) => {
+    const organizer = req.body;
+    organizerModels.createOrganizer(organizer)
+        .then((organizerId) => {
+            organizer.id = organizerId;
+            res.status(201).send('create organizer successfully!');
+        })
+        .catch((error) => {
+            console.error('Error creating organizer:', error);
+            res.status(500).send('Error creating organizer');
+        });
+});
+
 module.exports = router;
