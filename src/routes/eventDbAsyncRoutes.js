@@ -25,6 +25,20 @@ router.get('/', async (req,res) => {
     }
 });
 
+router.get('/:id', async (req,res) => {
+    try {
+        const id = req.params.id;
+        const event = await eventModels.getEventsById(id);
+        if (!event) {
+            res.status(404).send('The event with the given ID not found');
+        } else {
+            res.status(200).send(event);
+        }
+    } catch (error) {
+        res.status(500).send('Error getting event');
+    }
+});
+
 router.post('/', async (req,res) => {
     try {
         const event = req.body;

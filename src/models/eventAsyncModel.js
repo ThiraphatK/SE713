@@ -13,7 +13,7 @@ async function getAllEvents() {
 
 async function getEventsById(id) {
     try {
-        const [rows] = await pool.query('SELECT * FROME events WHERE id = ?', [id]);
+        const [rows] = await pool.query('SELECT * FROM events WHERE id = ?', [id]);
         return rows[0];
     } catch (error) {
         console.error('Error getting event:', err);
