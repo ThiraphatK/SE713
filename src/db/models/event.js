@@ -30,14 +30,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             // allowNull default is true
         },
-        petAllowed: {
-            type: DataTypes.BOOLEAN,
-            // allowNull default is true
-        },
-        organizer: {
-            type: DataTypes.STRING,
-            // allowNull default is true
-        },
         freezeTableName: true, // Prevent table name change to plural
         autoIncrement: true, // Add createAt and updateAt field
     });
