@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const eventModels = require('../models/eventAsyncModel');
+const eventModels = require('../models/eventSequelizeModel');
 
 router.get('/', async (req,res) => {
     const name = req.query.name;
@@ -43,8 +43,8 @@ router.post('/', async (req,res) => {
     try {
         const event = req.body;
         const eventId = await eventModels.addEvent(event);
-        event.id = eventId;
-        res.status(201).send(event);
+        res.send(event);
+        res.send(eventId.dataValues);
     } catch (error) {
         res.status(500).send('Error adding event');
     }
