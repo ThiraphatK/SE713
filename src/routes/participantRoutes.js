@@ -45,3 +45,5 @@ router.post('/:event/:id/participant', (req,res) => {
             res.status(500).send('Error adding participant');
         });
 });
+
+module.exports = router;
