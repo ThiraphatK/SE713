@@ -1,5 +1,5 @@
-const Event = require('../db/models/eventWitjOrganizer');
-const sequelize = require('../config/dbSequelize');
+const Event = require('../../db/models/eventWithOrganizer');
+const sequelize = require('../../config/dbSequelize');
 const { DataTypes, Op } = require('sequelize');
 const event = Event(sequelize, DataTypes);
 

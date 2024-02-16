@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const participantModels = require('../models/participantModel');
+const participantModels = require('../models/participantsModel');
 
 router.get('/', (req,res) => {
     const name = req.query.name;
     if (name) {
-        const participant = participantModels.getParticipantByName(name);
+        const participant = participantModels.getPaticipantsByPartialName(name)
         if (!participant) {
             res.status(404).send('The participant with the given name not found');
         } else {
