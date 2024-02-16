@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const eventModels = require('../models/eventSequelizeModel');
+const eventModels = require('../db/models/eventSequelizeEventOrganizationModel');
 
 router.get('/', async (req,res) => {
     const name = req.query.name;
