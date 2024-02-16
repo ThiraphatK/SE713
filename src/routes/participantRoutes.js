@@ -5,14 +5,14 @@ const participantModels = require('../models/participantsModel');
 router.get('/', (req,res) => {
     const name = req.query.name;
     if (name) {
-        const participant = participantModels.getPaticipantsByPartialName(name)
-        if (!participant) {
-            res.status(404).send('The participant with the given name not found');
-        } else {
-            res.send(participant);
-        }
+            const event = participantModels.getEventsByName(name);
+            if (!event) {
+                res.status(404).send('The event with the given name was not found');
+            } else {
+                res.send(event);
+            }
     } else {
-        participantModels.getAllParticipants()
+        participantModels.getAllEvents()
             .then((events) => {
                 res.send(events);
             }).catch((err) => {
