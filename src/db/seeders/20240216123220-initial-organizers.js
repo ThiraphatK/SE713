@@ -1,5 +1,4 @@
 'use strict';
-const mock = require('../../mock/eventMock');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -13,8 +12,17 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('event', 
-    mock.events, 
+    await queryInterface.bulkInsert('organizer', [
+      {
+        name: 'CMU',
+      },
+      {
+        name: 'CAMT'
+      },
+      {
+        name: 'Chiang Mai'
+      }
+    ], 
     {});
   },
 
@@ -25,6 +33,5 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('event', null, {});
   }
 };

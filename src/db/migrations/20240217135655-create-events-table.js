@@ -38,10 +38,6 @@ module.exports = {
         type: Sequelize.BOOLEAN
         // allowNull defaults to true
       },
-      organizer: {
-        type: Sequelize.STRING
-        // allowNull defaults to true
-      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -53,9 +49,20 @@ module.exports = {
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
       },
     });
+
+    await queryInterface.addColumn('event', 'organizerId', {
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'organizer',
+        key: 'id'
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'SET NULL'
+    });
   },
 
   async down (queryInterface, Sequelize) {
+    // await queryInterface.removeColumn('event', 'organizerId');
     await queryInterface.dropTable('event');
   }
 };
