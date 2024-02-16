@@ -55,3 +55,14 @@ exports.getEventsByName = (name) => {
         console.error('Error getting events by name:', err);
     });
 };
+
+exports.addEventPaticipant = async (eventId, participantId) => {
+    try {
+        const createdParticipant = await participant.create(participantData);
+        const foundEvent = await event.findByPk(eventId);
+        await foundEvent.addParticipant(createdParticipant);
+        return createdParticipant;
+    } catch (error) {
+        console.error('Error adding participant:', error);
+    }
+};

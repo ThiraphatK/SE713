@@ -34,3 +34,14 @@ router.get('/:id', (req,res) => {
             res.status(500).send('Error getting participant');
         });
 });
+
+router.post('/:event/:id/participant', (req,res) => {
+    const eventId = req.params.id;
+    const participantData = req.body;
+    participantModels.addEventPaticipant(eventId, participantData)
+        .then((participant) => {
+            res.status(201).send(participant);
+        }).catch((err) => {
+            res.status(500).send('Error adding participant');
+        });
+});
