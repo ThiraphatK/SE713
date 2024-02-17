@@ -29,6 +29,22 @@ router.get('/', (req, res) => {
     }
 });
 
+router.get('/:id', (req, res) => {
+    id = req.params.id;
+    organizerModels.getOrganizerById(id)
+        .then((organizer) => {
+            if (organizer) {
+                res.status(200).send(organizer);
+            } else {
+                res.status(404).send('Organizer not found');
+            }
+        })
+        .catch((error) => {
+            console.error('Error getting organizer:', error);
+            res.status(500).send('Error getting organizer');
+        });
+});
+
 router.post('/', (req, res) => {
     const organizer = req.body;
     organizerModels.createOrganizer(organizer)
@@ -63,6 +79,18 @@ router.delete('/', (req, res) => {
                 res.status(500).send('Error deleting organizer');
             });
     }
+});
+
+router.delete('/:id', (req, res) => {
+    id = req.params.id;
+    organizerModels.deleteOrganizerById(id)
+        .then((results) => {
+            res.status(200).send('delete organizer successfully!');
+        })
+        .catch((error) => {
+            console.error('Error deleting organizer:', error);
+            res.status(500).send('Error deleting organizer');
+        });
 });
 
 module.exports = router;
