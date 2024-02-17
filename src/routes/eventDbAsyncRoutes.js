@@ -28,7 +28,7 @@ router.get('/', async (req,res) => {
 router.get('/:id', async (req,res) => {
     try {
         const id = req.params.id;
-        const event = await eventModels.getEventsById(id);
+        const event = await eventModels.getEventById(id);
         if (!event) {
             res.status(404).send('The event with the given ID not found');
         } else {

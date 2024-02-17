@@ -7,7 +7,7 @@ const event = Event(sequelize, DataTypes);
 exports.addEvent = (eventData) => {
     return event.create(eventData)
         .then((event) => {
-            event;
+            return event;
         }).catch((err) => {
             console.error('Error creating event:', err);
         });
@@ -17,7 +17,7 @@ exports.addEvent = (eventData) => {
 exports.getEventById = (id) => {
     return event.findByPk(id)
         .then((event) => {
-            event;
+            return event;
         }).catch((err) => {
             console.error('Error getting event by ID:', err);
         });
@@ -26,9 +26,8 @@ exports.getEventById = (id) => {
 // Read (get all events)
 exports.getAllEvents = () => {
     return event.findAll()
-        .then((events) => {
-            events;
-        }).catch((err) => {
+        .then((events) => events)
+        .catch((err) => {
             console.error('Error getting all events:', err);
         });
 };
