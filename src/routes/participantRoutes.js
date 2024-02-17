@@ -35,15 +35,12 @@ router.get('/:id', (req,res) => {
         });
 });
 
-router.post('/:event/:id/participant', (req,res) => {
+router.post('/event/:id/participant', (req, res) => {
     const eventId = req.params.id;
     const participantData = req.body;
-    participantModels.addEventPaticipant(eventId, participantData)
-        .then((participant) => {
-            res.status(201).send(participant);
-        }).catch((err) => {
-            res.status(500).send('Error adding participant');
-        });
+    participantModels.addEventParticipant(eventId, participantData)
+        .then(participant => res.send(participant))
+        .catch(err => res.status(500).send('Error adding participant to event'));
 });
 
-module.exports = router;
+module.exports = router

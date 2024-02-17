@@ -4,59 +4,58 @@ const { DataTypes, Op, Model } = require('sequelize');
 const { Event:event, Participant:participant } = Participant(sequelize, DataTypes);
 
 exports.getAllEvents = () => {
-    return event.findAll({include: ['participant']})
-        .then((events) => {
-            events;
-        }).catch((err) => {
-            console.error('Error getting all events:', err);
-        });
+    return event.findAll({ include: ['participants'] })
+        .then(events => events)
+        .catch(error => console.error('Error getting events:', error));
 }
 
 exports.getEventById = (id) => {
     return event.findByPk(id, {
-        include: {
+        include: [{
             model: participant,
-            as: 'participant',
+            as: 'participants',
             attributes: ['name', 'phone'],
             through: {
                 attributes: []
             }
-        }
-    }).then((event) => {
-        event;
-    }).catch((err) => {
-        console.error('Error getting event by ID:', err);
-    });
+
+        }]
+    }).then(event => event)
+        .catch(error => console.error('Error getting event:', error));
 };
 
-exports.getEventsByName = (name) => {
+exports.getEventByName = (name) => {
     return event.findAll({
         where: {
             [Op.or]: [
-                {title: {
-                    [Op.like] : `%${name}%`
-                }},
-                {description: {
-                    [Op.like] : `%${name}%`
-                }}
+                {
+                    title: {
+                        [Op.like]: `%${name}%`
+                    }
+                },
+                {
+                    description: {
+                        [Op.like]: `%${name}%`
+
+                    }
+                }
             ]
         },
         include: [{
             model: participant,
-            as: 'participant',
+            as: 'participants',
             attributes: ['name', 'phone'],
             through: {
                 attributes: []
             }
-        }]
-    }).then((events) => {
-        events;
-    }).catch((err) => {
-        console.error('Error getting events by name:', err);
-    });
-};
 
-exports.addEventPaticipant = async (eventId, participantId) => {
+        }]
+    }).then(events => events)
+        .catch(error => console.error('Error getting events:', error));
+}
+
+
+exports.addEventParticipant = async (eventId, participantData) => {
     try {
         const createdParticipant = await participant.create(participantData);
         const foundEvent = await event.findByPk(eventId);
@@ -65,4 +64,4 @@ exports.addEventPaticipant = async (eventId, participantId) => {
     } catch (error) {
         console.error('Error adding participant:', error);
     }
-};
+}

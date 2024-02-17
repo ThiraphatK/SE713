@@ -1,8 +1,6 @@
-const sequelize = require("../../config/dbSequelize");
-
 module.exports = (sequelize, DataTypes) => {
     const Participant = sequelize.define('participant', {
-        id:{
+        id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             allowNull: false,
@@ -16,13 +14,14 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
             field: 'telNo'
-        },
-        freezeTableName: true,
-        autoIncrement: true
+        }
+    }, {
+        freezeTableName: true, // Prevent table name change to plural
+        autoTimeStamp: true, // Add createdAt and updatedAt fields
     });
-    
+
     const Event = sequelize.define('event', {
-        id:{
+        id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             allowNull: false,
@@ -41,27 +40,27 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         location: {
-            type: DataTypes.STRING,
-            allowNull: false
+            type: DataTypes.STRING
+            // allowNull defaults to true
         },
         date: {
-            type: DataTypes.DATE,
-            allowNull: false
+            type: DataTypes.STRING
+            // allowNull defaults to true
         },
         time: {
-            type: DataTypes.TIME,
-            allowNull: false
-        },
-        freezeTableName: true,
-        autoIncrement: true
+            type: DataTypes.STRING
+            // allowNull defaults to true
+        }
+    }, {
+        freezeTableName: true, // Prevent table name change to plural
+        autoTimeStamp: true, // Add createdAt and updatedAt fields
     });
-
-    const EventPaticaipant = sequelize.define('event-participant', {
-        id:{
-            type: DataTypes.INTEGER,
+    const EventParticipant = sequelize.define('event-participant', {
+        id: {
+            allowNull: false,
             autoIncrement: true,
             primaryKey: true,
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER
         },
         eventId: {
             type: DataTypes.INTEGER,
@@ -75,16 +74,17 @@ module.exports = (sequelize, DataTypes) => {
         participantId: {
             type: DataTypes.INTEGER,
             references: {
-                model: Participant,
+                model: 'participant',
                 key: 'id'
             },
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE'
-        },
-        freezeTableName: true,
-        autoIncrement: true
+        }
+    }, {
+        freezeTableName: true, // Prevent table name change to plural
+        autoTimeStamp: true, // Add createdAt and updatedAt fields
     });
-    Participant.belongsToMany(Event, { through: EventPaticaipant });
-    Event.belongsToMany(Participant, { through: EventPaticaipant });
-    return { Participant, Event, EventPaticaipant};
-};
+    Participant.belongsToMany(Event, { through: EventParticipant });
+    Event.belongsToMany(Participant, { through: EventParticipant });
+    return { Participant, Event, EventParticipant };
+}

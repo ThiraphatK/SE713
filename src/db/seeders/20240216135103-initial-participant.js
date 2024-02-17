@@ -12,20 +12,40 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('participant', [
+   await queryInterface.bulkInsert('participant', [
+    {
+      name: 'John Doe',
+      telNo: '0812345678'
+    },
+    {
+      name: 'Jane Doe',
+      telNo: '0812345679'
+    },
+    {
+      name: 'Jim Doe',
+      telNo: '0812345670'
+    }
+    ],
+    {});
+    
+    await queryInterface.bulkInsert('event-participant', [
       {
-        name: 'John Doe',
-        telNo: '0812345678'
+        eventId: 1,
+        participantId: 1
       },
       {
-        name: 'Jane Doe',
-        telNo: '0812345679'
+        eventId: 1,
+        participantId: 2
       },
       {
-        name: 'John Smith',
-        telNo: '0812345680'
+        eventId: 2,
+        participantId: 2
+      },
+      {
+        eventId: 3,
+        participantId: 3
       }
-    ], 
+    ],
     {});
   },
 
