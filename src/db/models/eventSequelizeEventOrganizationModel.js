@@ -5,6 +5,9 @@ const event = Event(sequelize, DataTypes);
 
 //Create
 exports.addEvent = (eventData) => {
+    if (eventData.organizerId === undefined || eventData.organizerId === null) {
+        eventData.organizerId = 1;
+    }
     return event.create(eventData)
         .then((event) => {
             return event;

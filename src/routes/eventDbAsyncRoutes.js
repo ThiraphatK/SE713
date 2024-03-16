@@ -44,7 +44,7 @@ router.post('/', async (req,res) => {
         const event = req.body;
         const eventId = await eventModels.addEvent(event);
         res.send(event);
-        res.send(eventId.dataValues);
+        // res.send(eventId.dataValues);
     } catch (error) {
         res.status(500).send('Error adding event');
     }
