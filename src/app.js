@@ -1,4 +1,5 @@
 const express = require('express');
+const cores = require('cors');
 const testRoutes = require('./routes/testRoutes');
 const eventRoutes = require('./routes/eventDbRoutes');
 const eventDbPromiseRoutes = require('./routes/eventDbPromiseRoutes');
@@ -7,6 +8,7 @@ const participantRoutes = require('./routes/participantRoutes');
 const app = express();
 
 app.use(express.json());
+app.use(cores());
 
 app.use('/test', testRoutes);
 app.use('/events',eventDbAsyncRoutes);
